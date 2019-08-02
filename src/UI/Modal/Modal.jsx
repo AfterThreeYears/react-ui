@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { noop } from 'lodash';
+import { removeDOMFromPage, renderDOMIntoPage } from '../../utils/dom';
 import './index.css';
 
 export default function Modal({
@@ -23,3 +24,36 @@ Modal.defaultProps = {
   onCancel: noop,
   onOk: noop,
 };
+
+Modal.confirm = function confirm(params) {
+  const { content, onOk, onCancel } = params;
+  let renderContainer = null;
+  function close() {
+    if(renderContainer) {
+      removeDOMFromPage(renderContainer);
+    }
+  }
+  async function handleOk() {
+    try {
+      await onOk();
+      close();
+    } catch (error) {
+      
+    }
+  }
+  async function handleCancel() {
+    try {
+      await onCancel();
+      close();
+    } catch (error) {
+      
+    }
+  }
+  renderContainer = renderDOMIntoPage(
+    <Modal
+      visible
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >{content}</Modal>
+  );
+}

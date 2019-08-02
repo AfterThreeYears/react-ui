@@ -5,6 +5,18 @@ import { Modal } from './UI/Modal';
 function App() {
   const [checked, setChecked] = React.useState(false);
   const [checkeds, setSheckeds] = React.useState(['2']);
+  function handleClick() {
+    Modal.confirm({
+      content: 'xxxx',
+      onOk: async () => {
+        console.log('ok');
+        return Promise.reject();
+      },
+      onCancel: () => {
+        console.log('onCancel')
+      },
+    });
+  }
   return (
     <div className="App">
       <Checkbox>勾选</Checkbox>
@@ -36,6 +48,7 @@ function App() {
       >
         ajdkas
       </Modal>
+      <button onClick={handleClick}>confirm</button>
     </div>
   );
 }
