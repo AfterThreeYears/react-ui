@@ -1,24 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Checkbox, CheckboxGroup } from './UI/Checkbox';
 
 function App() {
+  const [checked, setChecked] = React.useState(true);
+  const [checkeds, setSheckeds] = React.useState(['2']);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Checkbox>勾选</Checkbox>
+      <Checkbox
+        checked={checked}
+        onChange={(e) => {
+          setChecked(e.target.checked);
+        }}
+        name="checkbox1"
+      >
+        勾选{String(checked)}
+      </Checkbox>
+      <br />
+      {checkeds.join(',')}
+      <CheckboxGroup
+        name="checkbox1"
+        value={checkeds}
+        onChange={setSheckeds}
+      >
+        <Checkbox value='1'>a</Checkbox>
+        <Checkbox value='2'>b</Checkbox>
+        <Checkbox value='3'>c</Checkbox>
+      </CheckboxGroup>
     </div>
   );
 }

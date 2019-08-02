@@ -1,0 +1,21 @@
+.ui-checkbox {
+  position: relative;
+}
+
+.ui-checkbox input {
+  opacity: 0;
+}
+
+.ui-checkbox input + span:after {
+  width: 10px;
+  height: 10px;
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 1px solid;
+}
+
+.ui-checkbox input:checked + span:after {
+  background: red;
+}
